@@ -1,0 +1,89 @@
+#!/usr/bin/env python
+# coding: utf-8
+#Ce module servira plus tard
+import datetime
+
+#Calcul de l'IMC à l'aide d'une fonction, c'est plus propre
+def calculIMC(p, t):
+    return p/(t*t)
+
+#Entrée des données
+prenom = input("Entrez votre prenom : ")
+
+taille_verif = False
+while taille_verif == False:
+    try:    #bloc d'exception
+        taille = input("Entre votre taille : ")
+        taille = float(taille) #Nous rappellons que la fonction input() renvoie une variable de type str
+        taille_verif = True
+    except ValueError:
+        print("Veuillez recommencer")
+        taille_verif = False #Mesure de précaution
+
+poids_verif = False
+while poids_verif == False :
+    try:
+        poids = input("Entrez votre poids : ")
+        poids = float(poids) #idem
+        poids_verif = True
+    except ValueError:
+        print("Veuillez recommencer")
+        poids_verif = False
+
+#Calcul de l'IMC
+imc = calculIMC(poids, taille)
+
+
+if imc < 16.5:
+       print("Votre imc est de :",imc,".Vous êtes en état de famine ")
+       print("Il y a un problème....Mangez plus!",prenom)
+       interpretation = "famine"
+
+elif imc >= 16.5 and imc <= 18.5:
+       print("Votre imc est de :",imc,".Vous êtes en état de maigreur ")
+       print("Faudrait manger un peut plus",prenom)
+       interpretation = "maigreur"
+
+elif imc >= 18.5 and imc <= 25:
+       print("Votre imc est de :",imc,".Vous avez une corpulence normale")
+       print("Bravo",prenom)
+       interpretation = "corpulence normale"
+
+elif imc >= 25 and imc <= 30:
+       print("Votre imc est de :",imc,".Vous êtes en surpoids")
+       print("Régime...",prenom)
+       interpretation = "surpoids"
+
+elif imc >= 30 and imc <= 35:
+       print("Votre imc est de :",imc,".Vous êtes en état d'obésité modérée")
+       print("Régime...",prenom)
+       interpretation = "obésité modérée"
+
+elif imc >= 35 and imc <= 40:
+       print("Votre imc est de :",imc,".Vous êtes en état d'obésité sévère")
+       print("Régime...",prenom)
+       interpretation = "obésité sévère"
+
+elif imc > 40:
+       print("Votre imc est de :",imc,".Vous êtes en état d'obésité massive")
+       print("Régime...",prenom)
+       interpretation = "obésité massive"
+
+#Instanciement de la date
+date = datetime.date.today()
+
+#Enregistrement des données dans un fichier
+donnees = str(date)
+donnees_2 = str(prenom)
+donnees_3 = str(imc)
+donnees_4 = interpretation
+enr = open("donneesIMC.txt", "a")
+enr.write(donnees)
+enr.write(" - ")
+enr.write(donnees_2)
+enr.write(" : ")
+enr.write(donnees_3)
+enr.write(" ")
+enr.write(donnees_4)
+enr.write("\n")
+enr.close()

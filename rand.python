@@ -1,0 +1,6 @@
+#!/usr/bin/env python
+# coding: utf-8
+nombre = 12
+chiffre = 10
+
+print "Nombre de chifres à générer" nombre

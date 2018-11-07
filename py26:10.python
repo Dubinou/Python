@@ -1,0 +1,4 @@
+#!/usr/bin/env python
+
+import datetime
+    datetime.datetime.strptime(datestr)
